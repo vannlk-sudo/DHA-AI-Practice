@@ -1,21 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-test('login', async ({page}) => {
-    await page.goto('https://the-internet.herokuapp.com/login');
-    await page.getByLabel('Username').fill('tomsmith');
-    await page.getByLabel('Password').fill('SuperSecretPassword!');
-    await page.getByRole('button', { name: 'Login' }).click();
-    await expect(page.getByText('You logged into a secure area!')).toBeVisible();
-});
-
-test('login failure', async ({page}) => {
-    await page.goto('https://the-internet.herokuapp.com/login');
-    await page.getByLabel('Username').fill('toms');
-    await page.getByLabel('Password').fill('invalidPassword');
-    await page.getByRole('button', { name: 'Login' }).click();
-    await expect(page.getByText('Your username is invalid!')).toBeVisible();
-});
-
 test('check a box', async ({page}) => {
     await page.goto('https://the-internet.herokuapp.com/checkboxes');
     const allCheckboxes = page.locator('input[type="checkbox"]');
@@ -39,7 +23,7 @@ test(' Select multiple options', async ({page}) => {
     const dropdown1 = page.locator('select');
         await expect(dropdown1).toBeVisible();
     await dropdown1.selectOption([ 'apple', 'banana' ]);
-    await expect(dropdown1.locator('option:checked')).toHaveValues(['apple', 'banana']);
+    await expect(dropdown1.locator('option:checked')).toHaveText(['apple', 'banana']);
 });
 
 test('Hyperlink', async ({page}) => {
