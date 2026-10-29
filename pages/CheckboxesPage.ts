@@ -1,10 +1,14 @@
-import type { Page } from '@playwright/test';
+import type { Locator, Page } from '@playwright/test';
 
 export class CheckboxesPage {
   private readonly page: Page;
+  readonly checkbox1: Locator;
+  readonly checkbox2: Locator;
 
   constructor(page: Page) {
     this.page = page;
+    this.checkbox1 = page.getByRole('checkbox').nth(0);
+    this.checkbox2 = page.getByRole('checkbox').nth(1);
   }
 
   async goto() {
@@ -12,10 +16,10 @@ export class CheckboxesPage {
   }
 
   async checkCheckbox1() {
-    await this.page.getByRole('checkbox').nth(0).check();
+    await this.checkbox1.check();
   }
 
   async checkCheckbox2() {
-    await this.page.getByRole('checkbox').nth(1).check();
+    await this.checkbox2.check();
   }
 }
