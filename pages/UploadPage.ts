@@ -2,6 +2,7 @@ import type { Locator, Page } from '@playwright/test';
 
 export class UploadPage {
   private readonly page: Page;
+  readonly url = 'https://the-internet.herokuapp.com/upload';
   readonly fileInput: Locator;
   readonly uploadButton: Locator;
   readonly uploadedHeading: Locator;
@@ -14,7 +15,7 @@ export class UploadPage {
   }
 
   async goto() {
-    await this.page.goto('https://the-internet.herokuapp.com/upload');
+    await this.page.goto(this.url);
   }
 
   async attachFile(filePath: string) {

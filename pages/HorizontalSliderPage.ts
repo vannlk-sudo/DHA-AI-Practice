@@ -2,6 +2,7 @@ import type { Locator, Page } from '@playwright/test';
 
 export class HorizontalSliderPage {
   private readonly page: Page;
+  readonly url = 'https://the-internet.herokuapp.com/horizontal_slider';
   readonly slider: Locator;
 
   constructor(page: Page) {
@@ -10,11 +11,15 @@ export class HorizontalSliderPage {
   }
 
   async goto() {
-    await this.page.goto('https://the-internet.herokuapp.com/horizontal_slider');
+    await this.page.goto(this.url);
   }
 
   async getCurrentValue() {
     return Number(await this.slider.inputValue());
+  }
+
+  async printCurrentValue() {
+    console.log(`Current slider value: ${await this.getCurrentValue()}`);
   }
 
   // Press ArrowRight until the slider reaches the target value

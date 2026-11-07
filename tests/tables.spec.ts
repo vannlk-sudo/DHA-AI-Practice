@@ -1,12 +1,19 @@
 import { test, expect } from '../fixtures/tables.fixture';
 
-test('TC08: Web Table - Validate largest due person from a table', async ({ tablesPage }) => {
+test.beforeEach(async ({ tablesPage, page }) => {
+  // Precondition: Navigate to https://the-internet.herokuapp.com/tables
   await tablesPage.goto();
 
-  // Find the person with the largest due amount from the table data
-  const person = await tablesPage.getLargestDuePerson();
-  console.log(`Largest due person: ${person.firstName} ${person.lastName} - $${person.due.toFixed(2)}`);
+  // assertion: Verify the browser opened the Tables page
+  await expect(page).toHaveURL(tablesPage.url);
+});
 
-  // Verify on the page: that person's row shows the largest due amount
-  await expect(tablesPage.dueCellOf(person.firstName, person.lastName)).toHaveText(`$${person.due.toFixed(2)}`);
+test('TC08: Web Table - Validate largest due person from a table', async ({ tablesPage }) => {
+  // step 1: Focus on #table1
+  // step 2: Extract all rows (firstName, lastName, due amount)
+  // step 3: Find the person with the largest due amount
+  await tablesPage.findLargestDuePerson();
+
+  // assertion: Verify the person's full name matches the value shown on the page
+  await expect(tablesPage.largestDuePersonDueCell()).toHaveText(tablesPage.largestDueText());
 });

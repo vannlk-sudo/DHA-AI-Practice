@@ -2,6 +2,7 @@ import type { Locator, Page } from '@playwright/test';
 
 export class DropdownPage {
   private readonly page: Page;
+  readonly url = 'https://the-internet.herokuapp.com/dropdown';
   readonly dropdown: Locator;
 
   constructor(page: Page) {
@@ -10,7 +11,7 @@ export class DropdownPage {
   }
 
   async goto() {
-    await this.page.goto('https://the-internet.herokuapp.com/dropdown');
+    await this.page.goto(this.url);
   }
 
   async selectOption1() {

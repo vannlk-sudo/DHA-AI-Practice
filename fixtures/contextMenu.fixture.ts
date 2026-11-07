@@ -6,8 +6,6 @@ type Fixtures = {
 };
 
 export const test = base.extend<Fixtures>({
-  // Let getByTestId() find elements by their "id" attribute on this page
-  testIdAttribute: 'id',
   contextMenuPage: async ({ page }, use) => {
     await use(new ContextMenuPage(page));
   },

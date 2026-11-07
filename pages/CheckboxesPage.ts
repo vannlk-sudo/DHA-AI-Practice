@@ -2,6 +2,7 @@ import type { Locator, Page } from '@playwright/test';
 
 export class CheckboxesPage {
   private readonly page: Page;
+  readonly url = 'https://the-internet.herokuapp.com/checkboxes';
   readonly checkbox1: Locator;
   readonly checkbox2: Locator;
 
@@ -12,7 +13,7 @@ export class CheckboxesPage {
   }
 
   async goto() {
-    await this.page.goto('https://the-internet.herokuapp.com/checkboxes');
+    await this.page.goto(this.url);
   }
 
   async checkCheckbox1() {

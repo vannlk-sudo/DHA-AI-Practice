@@ -2,6 +2,7 @@ import type { Locator, Page } from '@playwright/test';
 
 export class TodoPage {
   private readonly page: Page;
+  readonly url = 'https://todomvc.com/examples/react/dist/';
   readonly newTodoInput: Locator;
   readonly todoItems: Locator;
   readonly itemsLeft: Locator;
@@ -24,7 +25,7 @@ export class TodoPage {
   }
 
   async goto() {
-    await this.page.goto('https://todomvc.com/examples/react/dist/');
+    await this.page.goto(this.url);
   }
 
   async reload() {

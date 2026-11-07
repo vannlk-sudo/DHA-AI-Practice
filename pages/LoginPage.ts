@@ -1,6 +1,7 @@
 import type { Page, Locator } from '@playwright/test';
 
 export class LoginPage {
+  readonly url = 'https://the-internet.herokuapp.com/login';
   readonly usernameInput: Locator;
   readonly passwordInput: Locator;
   readonly loginButton: Locator;
@@ -12,7 +13,7 @@ export class LoginPage {
   }
 
   async goto() {
-    await this.page.goto('https://the-internet.herokuapp.com/login');
+    await this.page.goto(this.url);
   }
 
   async fillCredentials(username: string, password: string) {
@@ -22,5 +23,10 @@ export class LoginPage {
 
   async clickLogin() {
     await this.loginButton.click();
+  }
+
+  // Flash message shown after login, e.g. "You logged into a secure area!"
+  message(text: string): Locator {
+    return this.page.getByText(text);
   }
 }
